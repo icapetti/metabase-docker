@@ -1,0 +1,20 @@
+name: metabase-app
+services:
+  db:
+    image: postgres:14.3-alpine3.16
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 12345678 # just for dev/study
+      POSTGRES_USER: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+  metabase:
+    image: metabase/metabase:v0.43.2
+    restart: "always"
+    ports:
+      - 3000:3000
+
+volumes:
+  db-data:
